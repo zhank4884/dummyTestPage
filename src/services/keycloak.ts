@@ -16,7 +16,7 @@ const getEnv = (key: string) => {
 };
 
 const keycloakConfig = {
-  url: getEnv('KEYCLOAK_URL') || 'https://vm100.upi.edu/admin/master/',
+  url: getEnv('KEYCLOAK_URL') || 'https://vm100.upi.edu/',
   realm: getEnv('KEYCLOAK_REALM') || 'sso',
   clientId: getEnv('KEYCLOAK_CLIENT_ID') || 'Varcel-TestedApps',
 };
