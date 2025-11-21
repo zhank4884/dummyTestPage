@@ -1,0 +1,17 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --upi-red: #E42222;
+  --upi-darkRed: #B91C1C;
+  --upi-deepRed: #991B1B;
+  --upi-yellow: #FFC400;
+  --upi-black: #000000;
+  --upi-white: #FFFFFF;
+}
+
+body {
+  @apply font-sans;
+}
