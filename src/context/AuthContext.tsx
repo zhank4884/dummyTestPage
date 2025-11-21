@@ -13,8 +13,8 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   userProfile: undefined,
-  login: () => {},
-  logout: () => {},
+  login: () => { },
+  logout: () => { },
   loading: true,
 });
 
@@ -40,7 +40,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const authenticated = await keycloak.init({
           onLoad: 'check-sso',
           // Ensure this file exists in public/ folder for production
-          silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
+          // silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
           pkceMethod: 'S256',
           checkLoginIframe: false, // Important to prevent timeouts in modern browsers
           enableLogging: true
@@ -67,30 +67,30 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = () => {
     keycloak.login().catch((err) => {
-        console.error("Login failed", err);
-        // DEMO FALLBACK: If keycloak fails (no server/network), enable demo mode
-        // Remove this in production if strict security is required
-        alert("Keycloak server unreachable. Entering Demo Mode.");
-        setIsAuthenticated(true);
-        setUserProfile({
-            firstName: "Ahmad",
-            lastName: "Fauzi Ramadhan",
-            email: "ahmadfauzi@upi.edu",
-            username: "2108567",
-            attributes: {
-                faculty: ["FPMIPA"],
-                major: ["S1 Teknik Informatika"]
-            }
-        });
+      console.error("Login failed", err);
+      // DEMO FALLBACK: If keycloak fails (no server/network), enable demo mode
+      // Remove this in production if strict security is required
+      alert("Keycloak server unreachable. Entering Demo Mode.");
+      setIsAuthenticated(true);
+      setUserProfile({
+        firstName: "Ahmad",
+        lastName: "Fauzi Ramadhan",
+        email: "ahmadfauzi@upi.edu",
+        username: "2108567",
+        attributes: {
+          faculty: ["FPMIPA"],
+          major: ["S1 Teknik Informatika"]
+        }
+      });
     });
   };
 
   const logout = () => {
     keycloak.logout().catch(() => {
-        // Fallback for logout errors
-        setIsAuthenticated(false);
-        setUserProfile(undefined);
-        window.location.href = "/";
+      // Fallback for logout errors
+      setIsAuthenticated(false);
+      setUserProfile(undefined);
+      window.location.href = "/";
     });
   };
 
