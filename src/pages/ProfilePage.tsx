@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import UpiLogo from '../components/UpILogo';
-import { 
-  User, LogOut, LayoutDashboard, Shield, Clock, CheckCircle, 
-  Mail, BookOpen, CreditCard, Key, Bell, Lock, 
-  Laptop, GraduationCap, Monitor
+import {
+  User, LogOut, LayoutDashboard, Shield, Clock, CheckCircle,
+  Mail, BookOpen, CreditCard, Key, Bell,
+  Laptop, GraduationCap
 } from 'lucide-react';
 
 const ProfilePage: React.FC = () => {
@@ -53,7 +53,7 @@ const ProfilePage: React.FC = () => {
               <LayoutDashboard size={16} />
               <span>Dashboard</span>
             </button>
-            <button 
+            <button
               onClick={handleLogout}
               className="flex items-center gap-2 px-5 py-2.5 bg-white/15 border border-white/30 rounded-xl text-sm font-semibold hover:bg-white hover:text-upi-red transition-all"
             >
@@ -70,14 +70,14 @@ const ProfilePage: React.FC = () => {
           <div className="relative bg-gradient-to-br from-upi-red to-upi-darkRed p-8 md:p-10 overflow-hidden">
             {/* Decorator */}
             <div className="absolute w-[300px] h-[300px] bg-white/10 rounded-full -top-[100px] -right-[100px]" />
-            
+
             <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8 text-center md:text-left text-white">
               <div className="relative">
                 <div className="w-[120px] h-[120px] bg-white rounded-[20px] flex items-center justify-center shadow-xl border-4 border-white/30">
                   <User size={60} className="text-slate-400" />
                 </div>
                 <div className="absolute -bottom-2 -right-2 w-9 h-9 bg-emerald-500 border-4 border-white rounded-full flex items-center justify-center">
-                   <CheckCircle size={16} className="text-white" />
+                  <CheckCircle size={16} className="text-white" />
                 </div>
               </div>
               <div className="flex-1">
@@ -85,148 +85,148 @@ const ProfilePage: React.FC = () => {
                   {userProfile.firstName} {userProfile.lastName}
                 </h2>
                 <p className="text-lg opacity-90 mb-6">
-                  {userProfile.username} • {userProfile.attributes?.major?.[0] || 'Mahasiswa'}
+                  {userProfile.username} • {(userProfile.attributes as any)?.major?.[0] || 'Mahasiswa'}
                 </p>
-                
+
                 <div className="flex flex-wrap justify-center md:justify-start gap-8">
-                   <StatItem value="6" label="Layanan Terhubung" />
-                   <StatItem value="42" label="Login Terakhir" />
-                   <StatItem value="Aktif" label="Status Akun" />
+                  <StatItem value="6" label="Layanan Terhubung" />
+                  <StatItem value="42" label="Login Terakhir" />
+                  <StatItem value="Aktif" label="Status Akun" />
                 </div>
               </div>
             </div>
           </div>
 
           <div className="p-8 md:p-10">
-             <div className="mb-10">
-                <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
-                  <span className="text-xl">📋</span> Informasi Pribadi
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <InfoBox label="Nama Lengkap" value={`${userProfile.firstName} ${userProfile.lastName}`} />
-                  <InfoBox label="NIM / NIP" value={userProfile.username || '-'} />
-                  <InfoBox label="Email UPI" value={userProfile.email || '-'} />
-                  <InfoBox label="Program Studi" value={userProfile.attributes?.major?.[0] || '-'} />
-                  <InfoBox label="Fakultas" value={userProfile.attributes?.faculty?.[0] || '-'} />
-                  <InfoBox label="Tahun Angkatan" value="2021" />
-                </div>
-             </div>
+            <div className="mb-10">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+                <span className="text-xl">📋</span> Informasi Pribadi
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <InfoBox label="Nama Lengkap" value={`${userProfile.firstName} ${userProfile.lastName}`} />
+                <InfoBox label="NIM / NIP" value={userProfile.username || '-'} />
+                <InfoBox label="Email UPI" value={userProfile.email || '-'} />
+                <InfoBox label="Program Studi" value={(userProfile.attributes as any)?.major?.[0] || '-'} />
+                <InfoBox label="Fakultas" value={(userProfile.attributes as any)?.faculty?.[0] || '-'} />
+                <InfoBox label="Tahun Angkatan" value="2021" />
+              </div>
+            </div>
 
-             <div>
-                <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
-                  <span className="text-xl">🔗</span> Layanan Terhubung
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                   <ConnectedService 
-                    icon={<LayoutDashboard />} 
-                    title="SPOT" 
-                    desc="Sistem Portal Terpadu untuk layanan akademik" 
-                    onClick={() => handleServiceClick('SPOT')}
-                   />
-                   <ConnectedService 
-                    icon={<Mail />} 
-                    title="Email UPI" 
-                    desc="Layanan email resmi Universitas Pendidikan Indonesia" 
-                    onClick={() => handleServiceClick('Email UPI')}
-                   />
-                   <ConnectedService 
-                    icon={<GraduationCap />} 
-                    title="SIAKAD" 
-                    desc="Sistem Informasi Akademik untuk pengelolaan data" 
-                    onClick={() => handleServiceClick('SIAKAD')}
-                   />
-                   <ConnectedService 
-                    icon={<Laptop />} 
-                    title="E-Learning" 
-                    desc="Platform pembelajaran online untuk perkuliahan" 
-                    onClick={() => handleServiceClick('E-Learning')}
-                   />
-                   <ConnectedService 
-                    icon={<BookOpen />} 
-                    title="Perpustakaan" 
-                    desc="Sistem perpustakaan digital UPI" 
-                    onClick={() => handleServiceClick('Perpustakaan')}
-                   />
-                   <ConnectedService 
-                    icon={<CreditCard />} 
-                    title="Payment Gateway" 
-                    desc="Sistem pembayaran online untuk administrasi" 
-                    onClick={() => handleServiceClick('Payment Gateway')}
-                   />
-                </div>
-             </div>
+            <div>
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+                <span className="text-xl">🔗</span> Layanan Terhubung
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <ConnectedService
+                  icon={<LayoutDashboard />}
+                  title="SPOT"
+                  desc="Sistem Portal Terpadu untuk layanan akademik"
+                  onClick={() => handleServiceClick('SPOT')}
+                />
+                <ConnectedService
+                  icon={<Mail />}
+                  title="Email UPI"
+                  desc="Layanan email resmi Universitas Pendidikan Indonesia"
+                  onClick={() => handleServiceClick('Email UPI')}
+                />
+                <ConnectedService
+                  icon={<GraduationCap />}
+                  title="SIAKAD"
+                  desc="Sistem Informasi Akademik untuk pengelolaan data"
+                  onClick={() => handleServiceClick('SIAKAD')}
+                />
+                <ConnectedService
+                  icon={<Laptop />}
+                  title="E-Learning"
+                  desc="Platform pembelajaran online untuk perkuliahan"
+                  onClick={() => handleServiceClick('E-Learning')}
+                />
+                <ConnectedService
+                  icon={<BookOpen />}
+                  title="Perpustakaan"
+                  desc="Sistem perpustakaan digital UPI"
+                  onClick={() => handleServiceClick('Perpustakaan')}
+                />
+                <ConnectedService
+                  icon={<CreditCard />}
+                  title="Payment Gateway"
+                  desc="Sistem pembayaran online untuk administrasi"
+                  onClick={() => handleServiceClick('Payment Gateway')}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Security Settings */}
         <div className="bg-white rounded-[20px] shadow-sm p-8 md:p-10 mb-8">
-           <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
-             <span className="text-xl">🔒</span> Keamanan Akun
-           </h3>
-           <div className="grid gap-5">
-              <SecurityItem 
-                 icon={<Key size={20} />} 
-                 title="Password" 
-                 desc="Terakhir diubah 30 hari yang lalu" 
-                 actionText="Ubah Password" 
-                 onAction={() => handleActionClick('Ubah Password')}
-              />
-              <SecurityItem 
-                 icon={<Shield size={20} />} 
-                 title="Two-Factor Authentication" 
-                 desc="Tambahkan lapisan keamanan ekstra untuk akun Anda" 
-                 actionText="Aktifkan" 
-                 primary
-                 onAction={() => handleActionClick('Aktifkan Two-Factor')}
-              />
-              <SecurityItem 
-                 icon={<Mail size={20} />} 
-                 title="Email Recovery" 
-                 desc={userProfile.email || 'ahmadfauzi@gmail.com'} 
-                 actionText="Update Email" 
-                 onAction={() => handleActionClick('Update Email')}
-              />
-              <SecurityItem 
-                 icon={<Bell size={20} />} 
-                 title="Notifikasi Login" 
-                 desc="Dapatkan notifikasi setiap ada aktivitas login" 
-                 actionText="Kelola Notifikasi" 
-                 onAction={() => handleActionClick('Kelola Notifikasi')}
-              />
-           </div>
+          <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+            <span className="text-xl">🔒</span> Keamanan Akun
+          </h3>
+          <div className="grid gap-5">
+            <SecurityItem
+              icon={<Key size={20} />}
+              title="Password"
+              desc="Terakhir diubah 30 hari yang lalu"
+              actionText="Ubah Password"
+              onAction={() => handleActionClick('Ubah Password')}
+            />
+            <SecurityItem
+              icon={<Shield size={20} />}
+              title="Two-Factor Authentication"
+              desc="Tambahkan lapisan keamanan ekstra untuk akun Anda"
+              actionText="Aktifkan"
+              primary
+              onAction={() => handleActionClick('Aktifkan Two-Factor')}
+            />
+            <SecurityItem
+              icon={<Mail size={20} />}
+              title="Email Recovery"
+              desc={userProfile.email || 'ahmadfauzi@gmail.com'}
+              actionText="Update Email"
+              onAction={() => handleActionClick('Update Email')}
+            />
+            <SecurityItem
+              icon={<Bell size={20} />}
+              title="Notifikasi Login"
+              desc="Dapatkan notifikasi setiap ada aktivitas login"
+              actionText="Kelola Notifikasi"
+              onAction={() => handleActionClick('Kelola Notifikasi')}
+            />
+          </div>
         </div>
 
         {/* Activity Log */}
         <div className="bg-white rounded-[20px] shadow-sm p-8 md:p-10">
-           <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
-             <span className="text-xl">📊</span> Aktivitas Terakhir
-           </h3>
-           <div className="flex flex-col gap-5">
-              <ActivityItem 
-                icon={<CheckCircle className="text-emerald-500" />} 
-                title="Login Berhasil" 
-                desc="Login dari Chrome di Windows • IP: 182.253.xxx.xxx"
-                time="2 jam yang lalu"
-              />
-              <ActivityItem 
-                icon={<BookOpen className="text-blue-500" />} 
-                title="Akses SPOT" 
-                desc="Mengakses layanan SPOT untuk melihat jadwal kuliah"
-                time="5 jam yang lalu"
-              />
-              <ActivityItem 
-                icon={<Mail className="text-upi-yellow" />} 
-                title="Akses Email UPI" 
-                desc="Login ke email UPI dari aplikasi mobile"
-                time="1 hari yang lalu"
-              />
-              <ActivityItem 
-                icon={<Key className="text-slate-500" />} 
-                title="Password Diubah" 
-                desc="Password berhasil diperbarui untuk keamanan akun"
-                time="30 hari yang lalu"
-              />
-           </div>
+          <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+            <span className="text-xl">📊</span> Aktivitas Terakhir
+          </h3>
+          <div className="flex flex-col gap-5">
+            <ActivityItem
+              icon={<CheckCircle className="text-emerald-500" />}
+              title="Login Berhasil"
+              desc="Login dari Chrome di Windows • IP: 182.253.xxx.xxx"
+              time="2 jam yang lalu"
+            />
+            <ActivityItem
+              icon={<BookOpen className="text-blue-500" />}
+              title="Akses SPOT"
+              desc="Mengakses layanan SPOT untuk melihat jadwal kuliah"
+              time="5 jam yang lalu"
+            />
+            <ActivityItem
+              icon={<Mail className="text-upi-yellow" />}
+              title="Akses Email UPI"
+              desc="Login ke email UPI dari aplikasi mobile"
+              time="1 hari yang lalu"
+            />
+            <ActivityItem
+              icon={<Key className="text-slate-500" />}
+              title="Password Diubah"
+              desc="Password berhasil diperbarui untuk keamanan akun"
+              time="30 hari yang lalu"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -251,7 +251,7 @@ const InfoBox: React.FC<{ label: string; value: string }> = ({ label, value }) =
 );
 
 const ConnectedService: React.FC<{ icon: React.ReactNode; title: string; desc: string; onClick: () => void }> = ({ icon, title, desc, onClick }) => (
-  <div 
+  <div
     onClick={onClick}
     className="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 hover:border-upi-red hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(228,34,34,0.1)] transition-all duration-300 cursor-pointer group"
   >
@@ -290,7 +290,7 @@ const SecurityItem: React.FC<SecurityItemProps> = ({ icon, title, desc, actionTe
         <p className="text-xs md:text-sm text-slate-500">{desc}</p>
       </div>
     </div>
-    <button 
+    <button
       onClick={onAction}
       className={`w-full sm:w-auto px-5 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all ${primary ? 'bg-upi-red border-upi-red text-white hover:bg-upi-darkRed hover:border-upi-darkRed' : 'bg-white border-slate-200 text-slate-700 hover:border-upi-red hover:text-upi-red hover:bg-red-50'}`}
     >
