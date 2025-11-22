@@ -43,6 +43,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           // pkceMethod: 'S256',
           checkLoginIframe: false,
           enableLogging: true,
+          redirectUri: window.location.origin
         };
         console.log("Initializing Keycloak with config:", initOptions);
         const authenticated = await keycloak.init(initOptions);
@@ -67,7 +68,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const login = () => {
-    keycloak.login().catch((err) => {
+    keycloak.login({ redirectUri: window.location.origin }).catch((err) => {
       console.error("Login failed", err);
       // DEMO FALLBACK: If keycloak fails (no server/network), enable demo mode
       // Remove this in production if strict security is required
