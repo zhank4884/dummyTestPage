@@ -31,7 +31,7 @@ const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-5 flex justify-between items-center">
           <div className="flex items-center gap-4 cursor-pointer" onClick={() => scrollToSection('home')}>
             <div className="w-[50px] h-[50px] bg-white rounded-xl p-2 shadow-[0_4px_15px_rgba(228,34,34,0.2)] flex items-center justify-center">
-              <UpiLogo />
+              <UpiLogo variant="white" />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold text-slate-800 leading-none">SSO UPI</h1>

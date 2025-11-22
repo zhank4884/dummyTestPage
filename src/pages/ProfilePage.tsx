@@ -41,7 +41,7 @@ const ProfilePage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-5 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <div className="w-[50px] h-[50px] bg-white rounded-xl p-2 flex items-center justify-center shadow-lg">
-              <UpiLogo />
+              <UpiLogo variant="red" className="w-full h-full" />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold leading-tight">SSO UPI</h1>
