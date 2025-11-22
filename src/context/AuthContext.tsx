@@ -38,13 +38,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         console.log("Initializing Keycloak...");
         const initOptions = {
-          onLoad: 'check-sso' as const,
-          // Ensure this file exists in public/ folder for production
+          // onLoad: 'check-sso',
           // silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
-          pkceMethod: 'S256' as const,
-          checkLoginIframe: false, // Important to prevent timeouts in modern browsers
+          // pkceMethod: 'S256',
+          checkLoginIframe: false,
           enableLogging: true,
-          redirectUri: window.location.origin
         };
         console.log("Initializing Keycloak with config:", initOptions);
         const authenticated = await keycloak.init(initOptions);
