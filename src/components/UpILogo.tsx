@@ -7,11 +7,13 @@ interface LogoProps {
 
 const UpiLogo: React.FC<LogoProps> = ({ className = "w-12 h-12" }) => {
   return (
-    <img
-      src="/UPI-Logo-dasar-putih.png"
-      alt="Logo UPI"
-      className={`object-contain ${className}`}
-    />
+    <div className={`relative flex items-center justify-center overflow-hidden ${className}`}>
+      <img
+        src="/UPI-Logo-dasar-merah.jpg"
+        alt="Logo UPI"
+        className="w-full h-full object-cover"
+      />
+    </div>
   );
 };
 
