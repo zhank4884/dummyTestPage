@@ -38,9 +38,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         console.log("Initializing Keycloak...");
         const initOptions = {
-          // onLoad: 'check-sso',
+          onLoad: 'check-sso' as const,
           // silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
-          // pkceMethod: 'S256',
+          pkceMethod: 'S256' as const,
           checkLoginIframe: false,
           enableLogging: true,
           redirectUri: window.location.origin
@@ -68,22 +68,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const login = () => {
-    keycloak.login({ redirectUri: window.location.origin }).catch((err) => {
+    const redirectUri = window.location.origin;
+    console.log("Attempting login with redirectUri:", redirectUri);
+    keycloak.login({ redirectUri }).catch((err) => {
       console.error("Login failed", err);
-      // DEMO FALLBACK: If keycloak fails (no server/network), enable demo mode
-      // Remove this in production if strict security is required
-      alert("Keycloak server unreachable. Entering Demo Mode.");
-      setIsAuthenticated(true);
-      setUserProfile({
-        firstName: "Ahmad",
-        lastName: "Fauzi Ramadhan",
-        email: "ahmadfauzi@upi.edu",
-        username: "2108567",
-        attributes: {
-          faculty: ["FPMIPA"],
-          major: ["S1 Teknik Informatika"]
-        }
-      });
+      alert("Login failed. Please check your connection or configuration.");
     });
   };
 
