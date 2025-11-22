@@ -1,4 +1,5 @@
 import Keycloak from 'keycloak-js';
+// Keycloak configuration service
 
 // Helper to get env variables whether using Vite (import.meta.env) or Create React App (process.env)
 const getEnv = (key: string) => {
